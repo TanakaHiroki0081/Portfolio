@@ -1,0 +1,20 @@
+{
+  "short_about": {
+    "headline": "Full-Stack Developer & UI/UX Specialist",
+    "paragraph": "I craft user-centered web applications that blend algorithmic optimization with intuitive design systems. Led front-end renewals at Recruit Direct Scout and Studysapuri, delivering fast, scalable solutions that users love."
+  },
+  "short_proof_blurb": "I build user-centered web applications that are fast, scalable, and beautifully designed. My background combines strong algorithms and optimization expertise with modern UI/UX and design system implementation. Let's discuss how I can help transform your digital product vision into reality.",
+  "skills_chips": "React · Next.js · FastAPI · Design systems · PostgreSQL · MongoDB · Performance · Accessibility",
+  "testimonial": "*Client feedback: 'Exceptional quality and speed' — Recruit.*",
+  "cta_section": {
+    "cta": "View my work",
+    "microhint": "Available for short sprints & long partnerships. Replies within 24 hours."
+  },
+  "seo_meta": "Full-stack developer specializing in React, Next.js, and UI/UX design. Led front-end renewals at Recruit and Studysapuri. Expert in algorithms, optimization, and design systems.",
+  "hero_alt_text": "Abstract geometric patterns flowing in harmonious algorithmic sequences, representing creative problem-solving and professional expertise",
+  "japanese_content": {
+    "about_jp": "ユーザー中心のWebアプリケーションを、アルゴリズム最適化と直感的なデザインシステムで構築します。Recruit Direct ScoutとStudysapuriでのフロントエンド刷新をリードし、ユーザーが愛用する高速でスケーラブルなソリューションを提供しています。",
+    "cta_jp": "作品を見る",
+    "microhint_jp": "短期スプリントから長期パートナーシップまで対応。24時間以内にご返信いたします。"
+  }
+}
