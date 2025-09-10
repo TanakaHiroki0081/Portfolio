@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useLanguage } from '@/components/LanguageProvider';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { 
@@ -19,43 +20,44 @@ import {
 } from 'lucide-react';
 
 const AboutPage = () => {
+  const { t } = useLanguage();
   const [activeSkillTab, setActiveSkillTab] = useState('all');
 
   const coreInterests = [
     {
       icon: <Cpu className="w-8 h-8" />,
-      title: "Algorithms & Optimization",
-      description: "Complex problem-solving and performance optimization"
+      title: t('core_algorithms_title'),
+      description: t('core_algorithms_desc')
     },
     {
       icon: <Code className="w-8 h-8" />,
-      title: "Full-Stack Development",
-      description: "End-to-end web application development"
+      title: t('core_fullstack_title'),
+      description: t('core_fullstack_desc')
     },
     {
       icon: <Zap className="w-8 h-8" />,
-      title: "Automation Systems",
-      description: "Workflow automation and process optimization"
+      title: t('core_automation_title'),
+      description: t('core_automation_desc')
     },
     {
       icon: <Gamepad2 className="w-8 h-8" />,
-      title: "Game Algorithms",
-      description: "AI, pathfinding, and game theory implementations"
+      title: t('core_game_title'),
+      description: t('core_game_desc')
     }
   ];
 
   const education = [
     {
-      year: "2019–2023",
-      institution: "Tokyo Institute of Technology",
-      degree: "School of Computing",
-      details: "Optimization, scalable systems, graph theory, A*, Min–Max search"
+      year: t('edu_tokyo_tech_year'),
+      institution: t('edu_tokyo_tech_institution'),
+      degree: t('edu_tokyo_tech_degree'),
+      details: t('edu_tokyo_tech_details')
     },
     {
-      year: "2016–2019",
-      institution: "University of Aizu",
-      degree: "School of Computer Science and Engineering",
-      details: "Algorithms, competitive programming, full-stack foundations"
+      year: t('edu_aizu_year'),
+      institution: t('edu_aizu_institution'),
+      degree: t('edu_aizu_degree'),
+      details: t('edu_aizu_details')
     }
   ];
 
@@ -119,29 +121,29 @@ const AboutPage = () => {
 
   const experiences = [
     {
-      title: "FastAPI Projects",
-      description: "Built high-performance APIs for scalable web systems with advanced optimization techniques.",
+      title: t('exp_fastapi_title'),
+      description: t('exp_fastapi_desc'),
       icon: <Zap className="w-6 h-6" />
     },
     {
-      title: "Automation with GAS",
-      description: "Automated workflows and processes, significantly improving operational efficiency.",
+      title: t('exp_gas_title'),
+      description: t('exp_gas_desc'),
       icon: <Cpu className="w-6 h-6" />
     },
     {
-      title: "Full-Stack Applications",
-      description: "React + Next.js frontends with Express/FastAPI backends for complete web solutions.",
+      title: t('exp_fullstack_title'),
+      description: t('exp_fullstack_desc'),
       icon: <Code className="w-6 h-6" />
     }
   ];
 
   const skillTabs = [
-    { id: 'all', label: 'All Skills' },
-    { id: 'frontend', label: 'Frontend' },
-    { id: 'backend', label: 'Backend' },
-    { id: 'database', label: 'Databases' },
-    { id: 'tools', label: 'Tools' },
-    { id: 'languages', label: 'Languages' }
+    { id: 'all', label: t('about_skill_tabs_all') },
+    { id: 'frontend', label: t('about_skill_tabs_frontend') },
+    { id: 'backend', label: t('about_skill_tabs_backend') },
+    { id: 'database', label: t('about_skill_tabs_database') },
+    { id: 'tools', label: t('about_skill_tabs_tools') },
+    { id: 'languages', label: t('about_skill_tabs_languages') }
   ];
 
   const containerVariants = {
@@ -184,10 +186,10 @@ const AboutPage = () => {
               Hiroki Tanaka
             </h1>
             <h2 className="text-2xl md:text-3xl font-semibold text-blue-600 mb-6" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-              Full-Stack Developer · Automation & Optimization Specialist
+              {t('about_role')}
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-              I create scalable software solutions through a blend of algorithms, automation, and full-stack development.
+              {t('about_hero_desc')}
             </p>
           </motion.div>
         </div>
@@ -205,7 +207,7 @@ const AboutPage = () => {
             className="md:text-left"
           >
             <h2 className="text-3xl font-bold text-gray-900 mb-8" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-              About Me
+              {t('about_about_me')}
             </h2>
             {/* Two-column layout: photo left, text right */}
             <div className="md:flex md:items-center md:gap-10">
@@ -240,7 +242,7 @@ const AboutPage = () => {
               {/* Intro Text */}
               <div className="md:w-2/3">
                 <p className="text-lg text-gray-700 leading-relaxed max-w-3xl md:max-w-none mx-auto md:mx-0" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                  My journey in programming started with C/C++ in 2015, leading me into competitive programming in 2017, where I learned how to solve complex problems under pressure. From there, I expanded into web technologies and automation, combining theoretical knowledge with practical development. I enjoy finding the essence of problems quickly and turning abstract ideas into efficient, working systems. Though I prefer minimal, focused communication, I collaborate globally on Discord from midnight to early morning, exchanging knowledge and working on projects with diverse teams.
+                  {t('about_long_intro')}
                 </p>
               </div>
             </div>
@@ -259,7 +261,7 @@ const AboutPage = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-              Education
+              {t('about_education')}
             </h2>
           </motion.div>
           
@@ -316,7 +318,7 @@ const AboutPage = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-              Core Interests
+              {t('about_core_interests')}
             </h2>
           </motion.div>
           
@@ -358,7 +360,7 @@ const AboutPage = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-              Technical Skills
+              {t('about_technical_skills')}
             </h2>
           </motion.div>
 
@@ -427,7 +429,7 @@ const AboutPage = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-              Experience & Projects
+              {t('about_experience_projects')}
             </h2>
           </motion.div>
           

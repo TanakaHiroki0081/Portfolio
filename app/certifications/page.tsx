@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useLanguage } from '@/components/LanguageProvider';
 
 interface Certification {
   id: number;
@@ -16,6 +17,67 @@ interface Certification {
   skills: string[];
   verified: boolean;
 }
+
+const getCertificationData = (id: number, t: any) => {
+  switch (id) {
+    case 1:
+      return {
+        name: t('cert_aws_name'),
+        issuer: t('cert_aws_issuer'),
+        category: "Cloud Computing",
+        description: t('cert_aws_desc'),
+        skills: t('cert_aws_skills').split(', ')
+      };
+    case 2:
+      return {
+        name: t('cert_sql_name'),
+        issuer: t('cert_sql_issuer'),
+        category: "Database",
+        description: t('cert_sql_desc'),
+        skills: t('cert_sql_skills').split(', ')
+      };
+    case 3:
+      return {
+        name: t('cert_fullstack_name'),
+        issuer: t('cert_fullstack_issuer'),
+        category: "Web Development",
+        description: t('cert_fullstack_desc'),
+        skills: t('cert_fullstack_skills').split(', ')
+      };
+    case 4:
+      return {
+        name: t('cert_gcp_name'),
+        issuer: t('cert_gcp_issuer'),
+        category: "Cloud Computing",
+        description: t('cert_gcp_desc'),
+        skills: t('cert_gcp_skills').split(', ')
+      };
+    case 5:
+      return {
+        name: t('cert_react_name'),
+        issuer: t('cert_react_issuer'),
+        category: "Web Development",
+        description: t('cert_react_desc'),
+        skills: t('cert_react_skills').split(', ')
+      };
+    case 6:
+      return {
+        name: t('cert_ml_name'),
+        issuer: t('cert_ml_issuer'),
+        category: "Machine Learning",
+        description: t('cert_ml_desc'),
+        skills: t('cert_ml_skills').split(', ')
+      };
+    default:
+      return {
+        name: '',
+        issuer: '',
+        category: '',
+        description: '',
+        skills: []
+      };
+  }
+};
 
 const certifications: Certification[] = [
   {
@@ -95,10 +157,23 @@ const certifications: Certification[] = [
 const categories = ["All", "Cloud Computing", "Web Development", "Database", "Machine Learning"];
 
 export default function CertificationsPage() {
+  const { t, lang } = useLanguage();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
+
+  const labelForCategory = (category: string) => {
+    switch (category) {
+      case 'All': return t('certs_categories_all');
+      case 'Cloud Computing': return t('certs_categories_cloud');
+      case 'Web Development': return t('certs_categories_web');
+      case 'Database': return t('certs_categories_db');
+      case 'Machine Learning': return t('certs_categories_ml');
+      default: return category;
+    }
+  };
+
 
   const filteredCertifications = useMemo(() => {
     return certifications.filter(cert => {
@@ -140,7 +215,7 @@ export default function CertificationsPage() {
                 <span className="text-5xl md:text-6xl bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent drop-shadow-lg">
                   🏆
                 </span>
-                <span>Certifications & Achievements</span>
+                <span>{t('certs_title')}</span>
               </h1>
             </div>
 
@@ -158,7 +233,7 @@ export default function CertificationsPage() {
                       </div>
                       <input
                         type="text"
-                        placeholder="Search certifications, skills, or issuers..."
+                        placeholder={t('certs_search_ph')}
                         style={{ fontFamily: 'Consolas, "Courier New", monospace' }}
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
@@ -177,7 +252,7 @@ export default function CertificationsPage() {
                     >
                       {categories.map((category) => (
                         <option key={category} value={category}>
-                          {category}
+                          {labelForCategory(category)}
                         </option>
                       ))}
                     </select>
@@ -187,15 +262,15 @@ export default function CertificationsPage() {
                 {/* Results Count and Clear Filters */}
                 <div className="mt-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                   <div className="text-sm text-gray-600" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                    <span className="font-semibold text-gray-800">{filteredCertifications.length}</span> certification{filteredCertifications.length !== 1 ? 's' : ''} found
+                    <span className="font-semibold text-gray-800">{filteredCertifications.length}</span> {t('certs_found_suffix')}
                     {searchTerm && (
                       <span className="ml-2 text-blue-600">
-                        for "<span className="font-medium">{searchTerm}</span>"
+                        {t('certs_for_kw')}<span className="font-medium">{searchTerm}</span>{t('certs_for_kw_suffix')}
                       </span>
                     )}
                     {selectedCategory !== 'All' && (
                       <span className="ml-2 text-blue-600">
-                        in <span className="font-medium">{selectedCategory}</span>
+                        {t('certs_in_cat')}<span className="font-medium">{labelForCategory(selectedCategory)}</span>{t('certs_in_cat_suffix')}
                       </span>
                     )}
                   </div>
@@ -211,7 +286,7 @@ export default function CertificationsPage() {
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                       </svg>
-                      Clear filters
+                      {t('certs_clear_filters')}
                     </button>
                   )}
                 </div>
@@ -221,78 +296,81 @@ export default function CertificationsPage() {
             {/* Certifications Grid */}
             <div className="flex-1 flex flex-col">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
-                {paginatedCertifications.map((cert, index) => (
-                  <div
-                    key={cert.id}
-                    className={`group rounded-2xl animate-fade-in-up stagger-${(index % 6) + 1} bg-white/90 backdrop-blur-sm shadow-xl hover:shadow-2xl border border-white/50 hover:border-blue-200 transition-all duration-500 transform hover:-translate-y-2 hover:scale-105`}
-                  >
-                    {/* Certificate Image */}
-                    <div className="relative h-48 bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 rounded-t-2xl overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-tr from-yellow-50/50 via-pink-50/50 to-blue-50/50"></div>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-500">
-                          <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                          </svg>
-                        </div>
-                      </div>
-                      {cert.verified && (
-                        <div className="absolute top-4 right-4">
-                          <div className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold flex items-center">
-                            <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                {paginatedCertifications.map((cert, index) => {
+                  const certData = getCertificationData(cert.id, t);
+                  return (
+                    <div
+                      key={cert.id}
+                      className={`group rounded-2xl animate-fade-in-up stagger-${(index % 6) + 1} bg-white/90 backdrop-blur-sm shadow-xl hover:shadow-2xl border border-white/50 hover:border-blue-200 transition-all duration-500 transform hover:-translate-y-2 hover:scale-105`}
+                    >
+                      {/* Certificate Image */}
+                      <div className="relative h-48 bg-gradient-to-br from-blue-100 via-indigo-100 to-purple-100 rounded-t-2xl overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-tr from-yellow-50/50 via-pink-50/50 to-blue-50/50"></div>
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-500">
+                            <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                             </svg>
-                            Verified
                           </div>
                         </div>
-                      )}
-                    </div>
-
-                    {/* Certificate Content */}
-                    <div className="p-6 bg-gradient-to-br from-white/80 to-blue-50/50 rounded-b-2xl">
-                      <div className="mb-4">
-                        <span className="inline-block bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                          {cert.category}
-                        </span>
+                        {cert.verified && (
+                          <div className="absolute top-4 right-4">
+                            <div className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold flex items-center">
+                              <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                              </svg>
+                              {t('certs_verified')}
+                            </div>
+                          </div>
+                        )}
                       </div>
-                      
-                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                        {cert.name}
-                      </h3>
-                      
-                      <p className="text-blue-600 text-sm mb-3 font-semibold" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                        {cert.issuer}
-                      </p>
-                      
-                      <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                        {cert.description}
-                      </p>
-                      
-                      <div className="mb-4">
-                        <div className="flex flex-wrap gap-2">
-                          {cert.skills.map((skill, index) => (
-                            <span
-                              key={index}
-                              className="inline-block bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 text-xs px-3 py-1.5 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow duration-200"
-                              style={{ fontFamily: 'Consolas, "Courier New", monospace' }}
-                            >
-                              {skill}
-                            </span>
-                          ))}
+
+                      {/* Certificate Content */}
+                      <div className="p-6 bg-gradient-to-br from-white/80 to-blue-50/50 rounded-b-2xl">
+                        <div className="mb-4">
+                          <span className="inline-block bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
+                            {labelForCategory(cert.category)}
+                          </span>
+                        </div>
+                        
+                        <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
+                          {certData.name}
+                        </h3>
+                        
+                        <p className="text-blue-600 text-sm mb-3 font-semibold" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
+                          {certData.issuer}
+                        </p>
+                        
+                        <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
+                          {certData.description}
+                        </p>
+                        
+                        <div className="mb-4">
+                          <div className="flex flex-wrap gap-2">
+                            {certData.skills.map((skill, skillIndex) => (
+                              <span
+                                key={skillIndex}
+                                className="inline-block bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 text-xs px-3 py-1.5 rounded-lg font-medium shadow-sm hover:shadow-md transition-shadow duration-200"
+                                style={{ fontFamily: 'Consolas, "Courier New", monospace' }}
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div className="text-xs text-gray-500 font-medium" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
+                          {t('certs_issued')}: {new Date(cert.date).toLocaleDateString(lang === 'ja' ? 'ja-JP' : 'en-US', { 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                          })}
                         </div>
                       </div>
-                      
-                      <div className="text-xs text-gray-500 font-medium" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                        Issued: {new Date(cert.date).toLocaleDateString('en-US', { 
-                          year: 'numeric', 
-                          month: 'long', 
-                          day: 'numeric' 
-                        })}
-                      </div>
                     </div>
-            </div>
-          ))}
-        </div>
+                  );
+                })}
+              </div>
 
               {/* Pagination */}
               {totalPages > 1 && (
@@ -303,7 +381,7 @@ export default function CertificationsPage() {
                     className="px-6 py-3 text-sm font-medium text-gray-600 bg-white/80 backdrop-blur-sm rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-blue-300"
                     style={{ fontFamily: 'Consolas, "Courier New", monospace' }}
                   >
-                    Previous
+                    {t('certs_prev')}
                   </button>
                   
                   {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
@@ -327,7 +405,7 @@ export default function CertificationsPage() {
                     className="px-6 py-3 text-sm font-medium text-gray-600 bg-white/80 backdrop-blur-sm rounded-xl disabled:opacity-50 disabled:cursor-not-allowed hover:bg-white hover:shadow-lg transition-all duration-300 border border-gray-200 hover:border-blue-300"
                     style={{ fontFamily: 'Consolas, "Courier New", monospace' }}
                   >
-                    Next
+                    {t('certs_next')}
                   </button>
                 </div>
               )}
@@ -342,7 +420,7 @@ export default function CertificationsPage() {
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                   </svg>
-                  Back to Home
+                  {t('certs_back_home')}
                 </Link>
               </div>
             </div>

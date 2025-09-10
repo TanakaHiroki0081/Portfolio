@@ -1,4 +1,10 @@
+"use client";
+
+import { useLanguage } from "@/components/LanguageProvider";
+
 export default function SkillsOverview() {
+  const { t } = useLanguage();
+  
   return (
     <section id="skills" aria-labelledby="skills-title" className="relative w-full py-16 md:py-20 overflow-hidden">
       {/* Light Background with subtle blue tint */}
@@ -16,10 +22,10 @@ export default function SkillsOverview() {
         {/* Header */}
         <div className="text-center">
           <h2 id="skills-title" className="text-3xl md:text-4xl font-bold text-[#0F172A] tracking-tight hero-title" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-            Skills Overview
+            {t('skills_title')}
           </h2>
           <p className="mt-3 text-base md:text-lg text-[#0F172A]/70 font-medium" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-            A quick snapshot of the technologies I use to ship reliable, scalable software.
+            {t('skills_subtitle')}
           </p>
         </div>
 
@@ -35,7 +41,7 @@ export default function SkillsOverview() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                   </svg>
                 </div>
-                Frontend
+{t('skills_frontend')}
               </h3>
               <ul className="space-y-3 text-sm font-medium text-[#0F172A]/90" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
                 <li className="flex items-center gap-2 hover:text-blue-600 transition-colors duration-200">
@@ -76,7 +82,7 @@ export default function SkillsOverview() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
                   </svg>
                 </div>
-                Backend
+{t('skills_backend')}
               </h3>
               <ul className="space-y-3 text-sm font-medium text-[#0F172A]/90" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
                 <li className="flex items-center gap-2 hover:text-green-600 transition-colors duration-200">
@@ -109,7 +115,7 @@ export default function SkillsOverview() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
                   </svg>
                 </div>
-                Databases
+{t('skills_databases')}
               </h3>
               <ul className="space-y-3 text-sm font-medium text-[#0F172A]/90" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
                 <li className="flex items-center gap-2 hover:text-purple-600 transition-colors duration-200">
@@ -146,7 +152,7 @@ export default function SkillsOverview() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
                   </svg>
                 </div>
-                Cloud & Infrastructure
+{t('skills_cloud')}
               </h3>
               <ul className="space-y-3 text-sm font-medium text-[#0F172A]/90" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
                 <li className="flex items-center gap-2 hover:text-orange-600 transition-colors duration-200">
@@ -172,7 +178,7 @@ export default function SkillsOverview() {
 
         {/* Core Expertise Badges */}
         <div className="mt-12">
-          <h3 className="text-lg font-medium mb-4 text-[#0F172A]" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>Core Expertise</h3>
+          <h3 className="text-lg font-medium mb-4 text-[#0F172A]" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>{t('skills_core_expertise')}</h3>
           <div className="flex flex-wrap gap-3">
             {[
               "React / Next.js",
@@ -197,7 +203,7 @@ export default function SkillsOverview() {
 
         {/* Also Familiar Badges */}
         <div className="mt-6">
-          <h3 className="text-lg font-medium mb-4 text-[#0F172A]/70" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>Also Familiar</h3>
+          <h3 className="text-lg font-medium mb-4 text-[#0F172A]/70" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>{t('skills_also_familiar')}</h3>
           <div className="flex flex-wrap gap-3">
             {[
               "Unity (C#)",

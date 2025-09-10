@@ -2,13 +2,17 @@
 
 import React, { useState } from "react";
 import { projects, projectDateMap, formatProjectPeriod } from "@/data/projects";
+import { useLanguage } from "@/components/LanguageProvider";
 import ProjectCard from "@/components/ProjectCard";
 
 export default function WorkPage() {
+  const { lang } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   // Create a list of categories (exclude Data Visualization, Internet of Things; include E-commerce)
-  const categories = ["All", "Web Development", "E-commerce", "Data Analytics", "Artificial Intelligence"];
+  const categories = lang === 'ja'
+    ? ["すべて", "Web開発", "Eコマース", "データ分析", "人工知能"]
+    : ["All", "Web Development", "E-commerce", "Data Analytics", "Artificial Intelligence"];
 
   // projectDateMap now comes from data layer
 
@@ -39,10 +43,10 @@ export default function WorkPage() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-            My Work
+            {lang === 'ja' ? '制作実績' : 'My Work'}
           </h1>
           <p className="text-xl text-white/70 max-w-3xl mx-auto">
-            Explore my portfolio of projects across different industries and technologies
+            {lang === 'ja' ? '分野や技術を横断したプロジェクトをご覧ください' : 'Explore my portfolio of projects across different industries and technologies'}
           </p>
         </div>
 
@@ -78,7 +82,7 @@ export default function WorkPage() {
         {filteredProjects.length === 0 && (
           <div className="text-center py-12">
             <p className="text-white/60 text-lg">
-              No projects found in the selected category.
+              {lang === 'ja' ? '選択したカテゴリにはプロジェクトがありません。' : 'No projects found in the selected category.'}
             </p>
           </div>
         )}

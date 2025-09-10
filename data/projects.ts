@@ -14,6 +14,15 @@ interface Project {
   githubUrl?: string;   // GitHub repository URL
   goalsAchieved?: string[]; // Goals achieved
   rating?: number;      // Project rating out of 5
+  ja?: {
+    name?: string;
+    category?: string;
+    description?: string;
+    purpose?: string;
+    role?: string;
+    approach?: string;
+    results?: string;
+  };
 }
 
 export const projects: Project[] = [
@@ -32,7 +41,16 @@ export const projects: Project[] = [
     goalsAchieved: ["Unified UX Design System", "Modern Frontend Architecture", "Cross-team Collaboration", "High-quality Standards", "Long-term Partnership"],
     rating: 4.8,
     liveUrl: "https://directscout.recruit.co.jp",
-    githubUrl: ""
+    githubUrl: "",
+    ja: {
+      name: "リクルート ダイレクトスカウト – フロントエンド全面刷新",
+      category: "ウェブ開発",
+      description: "リクルートのハイエンド転職スカウトサービスのUI/UXを近代化し、統一された高品質なデザインシステムへ刷新しました。",
+      purpose: "社内リソース不足を補いながら、サービス全体のUI/UXを再設計・近代化すること。",
+      role: "フロントエンドエンジニア／開発パートナーとして、デザインと実装の両面からリニューアルを推進。",
+      approach: "独自フレームワークへの迅速なキャッチアップ、仮説検証サイクルによるUI改善、横断連携の強化、デザインシステムの統一。",
+      results: "サービス全体のUXが統一され、開発効率・品質が向上。長期的な支援体制を確立。"
+    }
   },
   {
     id: "2",
@@ -49,7 +67,16 @@ export const projects: Project[] = [
     goalsAchieved: ["Academic Deadline Met", "System Modernization", "Performance Improvement", "Student Experience Enhancement", "Business Requirements Fulfilled"],
     rating: 4.7,
     liveUrl: "https://studysapuri.jp",
-    githubUrl: ""
+    githubUrl: "",
+    ja: {
+      name: "スタディサプリ中学講座 – PC版リニューアル",
+      category: "ウェブ開発",
+      description: "学習体験と開発基盤を近代化し、厳しいリリース期限内で要件を満たす形で再構築しました。",
+      purpose: "既存システムの刷新とUX向上、学習成果の最大化。",
+      role: "フロントエンドエンジニアとして、アーキテクチャ更新と主要ページの実装を担当。",
+      approach: "Next.js/GraphQLで再構築し、長期運用に耐える拡張性とパフォーマンスを確保。",
+      results: "新学期に間に合う形で安定リリース。パフォーマンスと保守性が改善。"
+    }
   },
   {
     id: "3",
@@ -66,7 +93,16 @@ export const projects: Project[] = [
     goalsAchieved: ["Workload Reduction", "Error Elimination", "Scalable Automation", "Student Transparency", "Time Efficiency"],
     rating: 4.6,
     liveUrl: "https://note.com",
-    githubUrl: ""
+    githubUrl: "",
+    ja: {
+      name: "学生ポートフォリオ自動化 – 週次レポート生成",
+      category: "自動化",
+      description: "GASでスプレッドシートとDrive/メールを連携し、100名以上の週次レポート作成を自動化。",
+      purpose: "手作業によるレポート作成負荷とヒューマンエラーの削減。",
+      role: "オートメーション開発者としてGASワークフローを設計・実装。",
+      approach: "テンプレート生成、定期トリガー、通知メールなどを自動化しスケーラブルに構築。",
+      results: "作業時間を大幅短縮し、正確でタイムリーな配信を実現。"
+    }
   },
   {
     id: "4",
@@ -83,7 +119,16 @@ export const projects: Project[] = [
     goalsAchieved: ["Automated Task Creation", "Priority Management", "Holiday Awareness", "Cognitive Load Reduction", "Reliability Improvement"],
     rating: 4.4,
     liveUrl: "",
-    githubUrl: ""
+    githubUrl: "",
+    ja: {
+      name: "タスク管理スプレッドシート – 定常タスク自動生成",
+      category: "自動化",
+      description: "Apps Scriptで定常タスクを自動投入し、優先度と進捗を可視化する軽量トラッカーを構築。",
+      purpose: "反復作業の自動化と認知負荷の低減。",
+      role: "ワークフロー最適化として設計・実装。",
+      approach: "日次トリガー、条件付き書式、チェックボックス等で直感的な運用を実現。",
+      results: "手入力を削減し、常に最新のタスクリストを維持。"
+    }
   },
   {
     id: "5",
@@ -100,7 +145,16 @@ export const projects: Project[] = [
     goalsAchieved: ["Data Processing", "Pattern Identification", "Visualization", "Modeling Foundation", "Market Understanding"],
     rating: 4.3,
     liveUrl: "https://www.kaggle.com/competitions/jpx-tokyo-stock-exchange-prediction",
-    githubUrl: ""
+    githubUrl: "",
+    ja: {
+      name: "東京株式市場の分析 – JPXデータ探索",
+      category: "データ分析",
+      description: "KaggleのJPXデータを活用し、可視化と統計により特徴把握と前処理基盤を構築。",
+      purpose: "予測モデリング前のEDAと指標整理。",
+      role: "データアナリストとして前処理・可視化・洞察抽出を担当。",
+      approach: "pandas/Matplotlib/Seabornで分布や時系列を分析。",
+      results: "重要特徴や分布の理解を深め、モデル化の土台を整備。"
+    }
   },
   {
     id: "6",
@@ -117,7 +171,16 @@ export const projects: Project[] = [
     goalsAchieved: ["Accurate Route Finding", "Algorithm Implementation", "Data Validation", "Visualization", "Foundation for Enhancement"],
     rating: 4.5,
     liveUrl: "",
-    githubUrl: ""
+    githubUrl: "",
+    ja: {
+      name: "東京道路網 – ダイクストラ法による最短経路解析",
+      category: "データ分析",
+      description: "OSMデータをGraph化し、ダイクストラ法で現実的な最短経路を算出・検証。",
+      purpose: "地図アプリに類する経路探索の再現と妥当性確認。",
+      role: "地理空間データエンジニアとして実装・可視化。",
+      approach: "OSMnx/NetworkX、PostGIS/QGISを活用し比較検証。",
+      results: "Google Mapsと近似の結果を得て、拡張余地を提示。"
+    }
   },
   {
     id: "7",
@@ -134,7 +197,16 @@ export const projects: Project[] = [
     goalsAchieved: ["Real-time Comments", "Slack Integration", "User Experience", "Documentation", "Replicable Solution"],
     rating: 4.4,
     liveUrl: "https://docs.slack.dev/block-kit/",
-    githubUrl: ""
+    githubUrl: "",
+    ja: {
+      name: "Next.jsブログ – リアルタイムコメント＆モデレーション",
+      category: "ウェブ開発",
+      description: "SupabaseとSlack連携でリアルタイムなコメント機能と審査フローを実装。",
+      purpose: "双方向の読者体験と運営の効率化。",
+      role: "フルスタックとしてフロント・API・DBを実装。",
+      approach: "Vercel AI SDK/Slack APIを組合せ、即時性の高いUIを実現。",
+      results: "ライブ更新・審査一体の快適なブログ体験を提供。"
+    }
   },
   {
     id: "8",
@@ -151,7 +223,16 @@ export const projects: Project[] = [
     goalsAchieved: ["Multi-modal AI", "File Upload Support", "Persistent History", "Full-stack Integration", "User Authentication"],
     rating: 4.6,
     liveUrl: "",
-    githubUrl: ""
+    githubUrl: "",
+    ja: {
+      name: "AIチャットボット – ファイル添付＆履歴永続化",
+      category: "人工知能",
+      description: "ファイル/画像を文脈として扱えるチャット体験を実装し、履歴を永続化。",
+      purpose: "テキストに限定されない高機能対話を実現。",
+      role: "フルスタックとしてUIとバックエンド統合を実施。",
+      approach: "認証・ストレージ・AI APIを統合し、即時応答のUXを設計。",
+      results: "継続的な会話体験と文脈理解を実現。"
+    }
   },
   {
     id: "9",
@@ -168,7 +249,16 @@ export const projects: Project[] = [
     goalsAchieved: ["Survival Pattern Analysis", "Data Visualization", "Feature Engineering", "Statistical Insights", "Historical Understanding"],
     rating: 4.2,
     liveUrl: "https://www.kaggle.com/competitions/titanic",
-    githubUrl: ""
+    githubUrl: "",
+    ja: {
+      name: "タイタニックデータの探索と生存分析",
+      category: "データ分析",
+      description: "性別・年齢・等級・家族構成等が生存率に与える影響を探索的に分析。",
+      purpose: "歴史的データに基づく要因分析と可視化。",
+      role: "データアナリストとして前処理・特徴設計・可視化を担当。",
+      approach: "カテゴリ別/回帰的な可視化でパターン把握。",
+      results: "生存に寄与する主要因を明確化。"
+    }
   },
   {
     id: "10",
@@ -185,7 +275,16 @@ export const projects: Project[] = [
     goalsAchieved: ["Comprehensive Product Range", "Customer Satisfaction", "Operational Efficiency", "SEO Optimization", "Brand Trust"],
     rating: 4.7,
     liveUrl: "https://www.henworld.ie/",
-    githubUrl: ""
+    githubUrl: "",
+    ja: {
+      name: "Henworld.ie – アイルランドのヘンパーティ専門店",
+      category: "Eコマース",
+      description: "多彩なカテゴリとパーソナライズ商品を備えたECサイト。運用効率とUXを両立。",
+      purpose: "購入体験を簡潔にし、在庫/配送連携を強化。",
+      role: "フロントエンド/EC開発として設計・実装・最適化を担当。",
+      approach: "BigCommerceでSEO・性能・追跡を最適化しUXを改善。",
+      results: "品揃え・信頼性・SEOで評価向上。"
+    }
   },
   {
     id: "11",
@@ -202,7 +301,16 @@ export const projects: Project[] = [
     goalsAchieved: ["Conversion Rate Increase", "Mobile Experience Enhancement", "Performance Improvement", "Client Satisfaction", "Brand Consistency"],
     rating: 4.5,
     liveUrl: "https://www.actionvillage.com/",
-    githubUrl: ""
+    githubUrl: "",
+    ja: {
+      name: "Action Village – ECサイト再設計とプラットフォーム移行",
+      category: "Eコマース",
+      description: "VolusionからBigCommerceへ移行し、UI/UXと性能を刷新。",
+      purpose: "ナビゲーション・チェックアウトの改善とCVR向上。",
+      role: "フロントエンド開発としてレスポンシブUIを実装。",
+      approach: "データ移行とパフォーマンス最適化を実行。",
+      results: "CVR向上・モバイル体験改善・速度向上を実現。"
+    }
   },
   {
     id: "12",
@@ -219,7 +327,16 @@ export const projects: Project[] = [
     goalsAchieved: ["Traffic Increase", "Conversion Rate Improvement", "Customer Satisfaction", "SEO Optimization", "User Experience Enhancement"],
     rating: 4.4,
     liveUrl: "https://www.goodstartpackaging.com",
-    githubUrl: ""
+    githubUrl: "",
+    ja: {
+      name: "Good Start Packaging – サステナブル食品容器ソリューション",
+      category: "Eコマース",
+      description: "再生可能素材を採用した環境配慮型パッケージのECサイト。",
+      purpose: "環境負荷低減と機能性の両立を訴求。",
+      role: "サイト開発・UI最適化・性能改善を担当。",
+      approach: "調査・設計・実装・最適化の一連を推進。",
+      results: "自然検索流入とCVR向上、ユーザー満足度改善。"
+    }
   },
   {
     id: "13",
@@ -236,7 +353,16 @@ export const projects: Project[] = [
     goalsAchieved: ["User Experience Enhancement", "Sales Increase", "Search Ranking Improvement", "B2B Functionality", "Data Migration Success"],
     rating: 4.6,
     liveUrl: "https://meddmax.com/",
-    githubUrl: ""
+    githubUrl: "",
+    ja: {
+      name: "MeddMax – B2B向けECプラットフォーム刷新",
+      category: "Eコマース",
+      description: "WixからBigCommerceへ移行し、B2B機能とテーマを最適化。",
+      purpose: "業務成長に耐える機能拡張とUX改善。",
+      role: "リード開発としてテーマ開発とB2B機能実装。",
+      approach: "データ移行、SEO、レスポンシブ最適化を実行。",
+      results: "UXと売上、検索流入の向上を達成。"
+    }
   },
   {
     id: "14",
@@ -253,7 +379,16 @@ export const projects: Project[] = [
     goalsAchieved: ["E-commerce Functionality", "Online Visibility Enhancement", "Customer Engagement", "Service Booking Streamlining", "Customer Satisfaction"],
     rating: 4.5,
     liveUrl: "https://raidresearch.com/",
-    githubUrl: ""
+    githubUrl: "",
+    ja: {
+      name: "Raid Research – ECサイト設計・開発",
+      category: "Eコマース",
+      description: "ブランディングを反映した近代的なECサイトを設計・実装。",
+      purpose: "専門性とサービスを魅力的に発信。",
+      role: "デザイン/開発を一貫して担当。",
+      approach: "ワイヤー/プロトタイプから実装・SEO最適化まで対応。",
+      results: "問い合わせと予約動線を改善し、可視性を向上。"
+    }
   },
   {
     id: "15",
@@ -270,7 +405,16 @@ export const projects: Project[] = [
     goalsAchieved: ["Site Modernization", "SEO Improvement", "Performance Enhancement", "Client Impact", "B2B Customer Engagement"],
     rating: 4.7,
     liveUrl: "https://www.tek-stock.com",
-    githubUrl: ""
+    githubUrl: "",
+    ja: {
+      name: "Tek-Stock LLC – ECサイト",
+      category: "Eコマース",
+      description: "BigCommerceで情報設計とナビゲーションを刷新し、SEO/性能を強化。",
+      purpose: "技術系ユーザー向けの商品探索を高速かつ直感的に。",
+      role: "開発・カスタマイズ・最適化全般を担当。",
+      approach: "メガメニュー・フィルタ・構造化データ等を実装。",
+      results: "見た目・速度・検索流入を総合的に改善。"
+    }
   },
   {
     id: "16",
@@ -287,7 +431,16 @@ export const projects: Project[] = [
     goalsAchieved: ["Interface Modernization", "Mobile Optimization", "Performance Improvement", "SEO Enhancement", "E-commerce Functionality", "Community Engagement", "Accessibility Compliance"],
     rating: 4.8,
     liveUrl: "https://dickpondathletics.com",
-    githubUrl: ""
+    githubUrl: "",
+    ja: {
+      name: "Dick Pond Athletics – ECサイト再設計",
+      category: "Eコマース",
+      description: "ブランド性を高める近代的UIと高速表示でEC体験を刷新。",
+      purpose: "商品訴求力とコミュニティ性の強化。",
+      role: "デザインからテーマ実装、SEO/性能まで一貫対応。",
+      approach: "画像最適化/遅延読込/スクリプト最適化などで高速化。",
+      results: "モバイル最適化・検索可視性・閲覧体験が大幅に向上。"
+    }
   }
 ];
 

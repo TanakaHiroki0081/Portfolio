@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useLanguage } from "./LanguageProvider";
 
 export default function Footer() {
+  const { t } = useLanguage();
 
   return (
     <footer className="w-full bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
@@ -15,15 +19,11 @@ export default function Footer() {
                 <span className="text-white font-bold text-lg">HT</span>
               </div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                Hiroki Tanaka
+                {t('footer_name')}
               </h3>
             </div>
             <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6 max-w-md" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-              <span className="font-semibold text-gray-800 dark:text-gray-200">Full-stack developer passionate about creating beautiful and functional web experiences</span>. 
-              <span className="text-blue-600 dark:text-blue-400 font-medium">Specializing in modern technologies and clean, efficient code</span>.
-              <br/><br/>
-              <span className="font-semibold text-gray-800 dark:text-gray-200">Engineer passionate about automation and optimization</span>, creating systems that save time and maximize performance. 
-              Skilled in <span className="text-blue-600 dark:text-blue-400 font-medium">algorithms</span>, <span className="text-blue-600 dark:text-blue-400 font-medium">scalable architectures</span>, and <span className="text-blue-600 dark:text-blue-400 font-medium">intelligent processes</span>. 
+              {t('footer_description')}
             </p>
             
             {/* Download CV Button */}
@@ -36,14 +36,14 @@ export default function Footer() {
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              Download CV
+{t('footer_download_cv')}
             </a>
           </div>
 
           {/* Quick Links */}
           <div className="col-span-1">
             <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-4 uppercase tracking-wider" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-              Quick Links
+              {t('footer_quick_links')}
             </h4>
             <ul className="space-y-3">
               <li>
@@ -52,7 +52,7 @@ export default function Footer() {
                   className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 text-sm flex items-center group hover:translate-x-1 footer-link link-enhanced"
                 >
                   <span className="w-1 h-1 bg-gray-400 group-hover:bg-blue-600 rounded-full mr-2 transition-all duration-200 group-hover:scale-125"></span>
-                  <span className="font-medium">Home</span>
+                  <span className="font-medium">{t('nav_home')}</span>
                   <svg className="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -64,7 +64,7 @@ export default function Footer() {
                   className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 text-sm flex items-center group hover:translate-x-1 footer-link link-enhanced"
                 >
                   <span className="w-1 h-1 bg-gray-400 group-hover:bg-blue-600 rounded-full mr-2 transition-all duration-200 group-hover:scale-125"></span>
-                  <span className="font-medium">About</span>
+                  <span className="font-medium">{t('nav_about')}</span>
                   <svg className="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -76,7 +76,7 @@ export default function Footer() {
                   className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 text-sm flex items-center group hover:translate-x-1 footer-link link-enhanced"
                 >
                   <span className="w-1 h-1 bg-gray-400 group-hover:bg-blue-600 rounded-full mr-2 transition-all duration-200 group-hover:scale-125"></span>
-                  <span className="font-medium">Work</span>
+                  <span className="font-medium">{t('nav_work')}</span>
                   <svg className="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -88,7 +88,7 @@ export default function Footer() {
                   className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 text-sm flex items-center group hover:translate-x-1 footer-link link-enhanced"
                 >
                   <span className="w-1 h-1 bg-gray-400 group-hover:bg-blue-600 rounded-full mr-2 transition-all duration-200 group-hover:scale-125"></span>
-                  <span className="font-medium">Certifications</span>
+                  <span className="font-medium">{t('nav_certs')}</span>
                   <svg className="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -100,7 +100,7 @@ export default function Footer() {
                   className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 text-sm flex items-center group hover:translate-x-1 footer-link link-enhanced"
                 >
                   <span className="w-1 h-1 bg-gray-400 group-hover:bg-blue-600 rounded-full mr-2 transition-all duration-200 group-hover:scale-125"></span>
-                  <span className="font-medium">Contact</span>
+                  <span className="font-medium">{t('nav_contact')}</span>
                   <svg className="w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -112,7 +112,7 @@ export default function Footer() {
           {/* Social Links */}
           <div className="col-span-1">
             <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-4 uppercase tracking-wider" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-              Connect
+              {t('footer_connect')}
             </h4>
             <div className="flex space-x-4 mb-6">
               <a
@@ -166,7 +166,7 @@ export default function Footer() {
         <div className="pt-8 border-t border-gray-200 dark:border-gray-700">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-600 dark:text-gray-400 text-sm" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-              © 2024 Hiroki Tanaka. All rights reserved.
+              {t('footer_copyright')}
             </p>
             <div className="mt-4 md:mt-0 flex items-center space-x-6">
               <a
@@ -174,14 +174,14 @@ export default function Footer() {
                 className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 text-sm"
                 style={{ fontFamily: 'Consolas, "Courier New", monospace' }}
               >
-                Privacy Policy
+{t('footer_privacy')}
               </a>
               <a
                 href="/terms"
                 className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 text-sm"
                 style={{ fontFamily: 'Consolas, "Courier New", monospace' }}
               >
-                Terms of Service
+{t('footer_terms')}
               </a>
             </div>
           </div>

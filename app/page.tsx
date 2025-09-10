@@ -1,10 +1,13 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
+import { useLanguage } from "@/components/LanguageProvider";
 import SkillsOverview from "./components/SkillsOverview";
 import MajorProjects from "./components/MajorProjects";
 import CertificationsSection from "../components/CertificationsSection";
 
 export default function Home() {
+  const { t } = useLanguage();
   return (
     <>
       <header className="relative min-h-screen overflow-hidden">
@@ -40,7 +43,7 @@ export default function Home() {
                     Hiroki Tanaka
                     <br/>
                     <span className="text-2xl sm:text-3xl lg:text-3xl xl:text-4xl font-semibold text-[#0F172A]/90">
-                      Full-Stack Developer | Algorithms & Optimization
+                      {t('home_role')}
                     </span>
                   </h2>
                 </div>
@@ -48,7 +51,7 @@ export default function Home() {
                 {/* SEO-Optimized Introduction Text */}
                 <div className="animate-fade-in-up animation-delay-200 intro-text">
                   <h2 className="text-sm sm:text-base lg:text-lg text-[#0F172A]/80 leading-relaxed font-medium" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                    I'm a full-stack developer from Japan with a strong foundation in algorithms and optimization. My background in competitive programming (ICPC, AtCoder) helps me quickly analyze complex problems and design efficient solutions. I specialize in React/Next.js, FastAPI, and Express, building scalable web applications backed by PostgreSQL, MongoDB, and AWS. I enjoy working with international teams and bringing technical clarity to challenging projects.
+                    {t('home_intro')}
                   </h2>
                 </div>
 
@@ -60,7 +63,7 @@ export default function Home() {
                     aria-label="View my work — Hiroki Tanaka"
                   >
                     <span className="relative z-10 flex items-center justify-center" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                      View My Work
+                      {t('home_cta_work')}
                       <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>
@@ -74,7 +77,7 @@ export default function Home() {
                     aria-label="Download Resume — Hiroki Tanaka"
                   >
                     <span className="flex items-center justify-center" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                      Resume
+                      {t('home_cta_resume')}
                       <svg className="w-5 h-5 ml-2 group-hover:translate-y-[-2px] transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
@@ -87,7 +90,7 @@ export default function Home() {
                     aria-label="Contact me — Hiroki Tanaka"
                   >
                     <span className="flex items-center justify-center" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                      Contact Me
+                      {t('home_cta_contact')}
                       <svg className="w-5 h-5 ml-2 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                       </svg>
@@ -98,13 +101,13 @@ export default function Home() {
                 {/* Skill Chips */}
                 <div className="flex flex-wrap gap-3 animate-fade-in-up animation-delay-600">
                   <span className="px-4 py-2 rounded-full text-sm font-medium text-[#0F172A] skill-chip-enhanced" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                    React
+                    {t('home_skill_react')}
                   </span>
                   <span className="px-4 py-2 rounded-full text-sm font-medium text-[#0F172A] skill-chip-enhanced" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                    FastAPI
+                    {t('home_skill_fastapi')}
                   </span>
                   <span className="px-4 py-2 rounded-full text-sm font-medium text-[#0F172A] skill-chip-enhanced" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                    C++ Algorithms
+                    {t('home_skill_cpp_algo')}
                   </span>
                   <span className="px-2 py-1 bg-[#FFC857]/20 rounded-full text-xs font-medium text-[#0F172A] skill-chip-enhanced">
                     ✨

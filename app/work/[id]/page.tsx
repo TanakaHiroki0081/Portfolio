@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { projects, formatProjectPeriod } from "@/data/projects";
+import { useLanguage } from "@/components/LanguageProvider";
 import { useState, use, useEffect } from "react";
 
 interface ProjectDetailPageProps {
@@ -187,9 +188,85 @@ function MainDemo({
   );
 }
 
+// Function to translate project categories
+function translateCategory(category: string, t: any): string {
+  const categoryMap: { [key: string]: string } = {
+    'Web Development': t('category_web_development'),
+    'E-commerce': t('category_ecommerce'),
+    'Automation': t('category_automation'),
+    'Data Analytics': t('category_data_analytics'),
+    'Artificial Intelligence': t('category_artificial_intelligence')
+  };
+  
+  return categoryMap[category] || category;
+}
+
+// Function to translate goals achieved
+function translateGoal(goal: string, t: any): string {
+  const goalMap: { [key: string]: string } = {
+    'Unified UX Design System': t('goal_unified_ux'),
+    'Modern Frontend Architecture': t('goal_modern_frontend'),
+    'Cross-team Collaboration': t('goal_cross_team'),
+    'High-quality Standards': t('goal_high_quality'),
+    'Long-term Partnership': t('goal_long_term'),
+    'Academic Deadline Met': t('goal_academic_deadline'),
+    'System Modernization': t('goal_system_modernization'),
+    'Performance Improvement': t('goal_performance_improvement'),
+    'Student Experience Enhancement': t('goal_student_experience'),
+    'Business Requirements Fulfilled': t('goal_business_requirements'),
+    'Workload Reduction': t('goal_workload_reduction'),
+    'Error Elimination': t('goal_error_elimination'),
+    'Scalable Automation': t('goal_scalable_automation'),
+    'Student Transparency': t('goal_student_transparency'),
+    'Time Efficiency': t('goal_time_efficiency'),
+    'Automated Task Creation': t('goal_automated_tasks'),
+    'Priority Management': t('goal_priority_management'),
+    'Holiday Awareness': t('goal_holiday_awareness'),
+    'Cognitive Load Reduction': t('goal_cognitive_load'),
+    'Reliability Improvement': t('goal_reliability'),
+    'Data Processing': t('goal_data_processing'),
+    'Pattern Identification': t('goal_pattern_identification'),
+    'Visualization': t('goal_visualization'),
+    'Modeling Foundation': t('goal_modeling_foundation'),
+    'Market Understanding': t('goal_market_understanding'),
+    'Accurate Route Finding': t('goal_accurate_routing'),
+    'Algorithm Implementation': t('goal_algorithm_implementation'),
+    'Data Validation': t('goal_data_validation'),
+    'Foundation for Enhancement': t('goal_foundation_enhancement'),
+    'Real-time Comments': t('goal_realtime_comments'),
+    'Slack Integration': t('goal_slack_integration'),
+    'User Experience': t('goal_user_experience'),
+    'Documentation': t('goal_documentation'),
+    'Replicable Solution': t('goal_replicable'),
+    'Multi-modal AI': t('goal_multimodal_ai'),
+    'File Upload Support': t('goal_file_upload'),
+    'Persistent History': t('goal_persistent_history'),
+    'Full-stack Integration': t('goal_fullstack_integration'),
+    'User Authentication': t('goal_user_auth'),
+    'Survival Pattern Analysis': t('goal_survival_analysis'),
+    'Data Visualization': t('goal_data_viz'),
+    'Feature Engineering': t('goal_feature_engineering'),
+    'Statistical Insights': t('goal_statistical_insights'),
+    'Historical Understanding': t('goal_historical_understanding'),
+    'Site Modernization': t('goal_site_modernization'),
+    'Performance Enhancement': t('goal_performance_enhancement'),
+    'B2B Customer Engagement': t('goal_b2b_engagement'),
+    'SEO Improvement': t('goal_seo_improvement'),
+    'Client Impact': t('goal_client_impact'),
+    'Traffic Increase': t('goal_traffic_increase'),
+    'Customer Satisfaction': t('goal_customer_satisfaction'),
+    'User Experience Enhancement': t('goal_user_experience_enhancement'),
+    'Conversion Rate Improvement': t('goal_conversion_rate_improvement'),
+    'SEO Optimization': t('goal_seo_optimization')
+  };
+  
+  return goalMap[goal] || goal;
+}
+
 export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
   // Unwrap the params Promise using React.use()
   const { id } = use(params);
+  const { lang, t } = useLanguage();
   
   // Find the project in the projects array by id
   const project = projects.find(p => p.id === id);
@@ -202,10 +279,10 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
         <div className="relative z-10 max-w-[1600px] mx-auto px-6 sm:px-12 lg:px-8 py-12">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-white mb-4" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-              Project Not Found
+              {t('project_not_found')}
             </h1>
             <p className="text-white/60 mb-8">
-              The project you're looking for doesn't exist.
+              {t('project_not_found_desc')}
             </p>
             <Link
               href="/work"
@@ -214,7 +291,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
-              Back to Work
+{t('project_back_to_work')}
             </Link>
           </div>
         </div>
@@ -312,7 +389,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
-          Back to Work
+{t('project_back_to_work')}
         </Link>
 
         {/* Project Header with Main Demo (carousel) and Detailed Description */}
@@ -335,24 +412,24 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
                   />
                   <div className="mt-3 flex items-center justify-between text-xs text-white/70">
                     <span>
-                      Screenshots: {imagesCount} · Videos: {videosCount}
+{t('project_screenshots')}: {imagesCount} · {t('project_videos')}: {videosCount}
                     </span>
                     <span>
-                      {isVideo && currentVideoNum ? `Video ${currentVideoNum}/${videosCount}` : currentImageNum ? `Image ${currentImageNum}/${imagesCount}` : ''}
+                      {isVideo && currentVideoNum ? `${t('project_video')} ${currentVideoNum}/${videosCount}` : currentImageNum ? `${t('project_image')} ${currentImageNum}/${imagesCount}` : ''}
                     </span>
                   </div>
                 </div>
               ) : (
                 <div className="w-full h-96 bg-white/5 rounded-xl flex items-center justify-center border border-white/10">
-                  <p className="text-white/60">No media available</p>
+                  <p className="text-white/60">{t('project_no_media')}</p>
                 </div>
               )}
             </div>
 
             {/* Project Info with Detailed Description */}
             <div className="order-1 lg:order-2">
-              <h1 className="text-4xl font-bold text-white mb-4" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                {project.name}
+              <h1 className="text-4xl font-bold text-white mb-4" style={{ fontFamily: 'Consolas, \"Courier New\", monospace' }}>
+                {lang === 'ja' && project.ja?.name ? project.ja.name : project.name}
               </h1>
               
               <div className="flex flex-wrap items-center gap-4 mb-6">
@@ -362,7 +439,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
                   </span>
                 )}
                 <span className="px-3 py-1 bg-purple-500/20 text-purple-300 text-sm font-medium rounded-full border border-purple-500/30">
-                  {project.category}
+                  {lang === 'ja' && project.ja?.category ? project.ja.category : translateCategory(project.category, t)}
                 </span>
               </div>
 
@@ -381,11 +458,11 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
               {/* Detailed Project Description */}
               <div className="bg-white/5 rounded-xl p-6 mb-6 border border-white/10">
                 <h2 className="text-xl font-semibold text-white mb-4 flex items-center">
-                  📋 Project Overview
+                  📋 {t('project_overview_title')}
                 </h2>
                 <div className="prose prose-lg max-w-none">
                   <p className="text-white/80 leading-relaxed">
-                    {project.description}
+                    {lang === 'ja' && project.ja?.description ? project.ja.description : project.description}
                   </p>
                 </div>
                 {(project.rating || project.liveUrl || project.githubUrl) && (
@@ -427,7 +504,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
                           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                           </svg>
-                          Live Site
+{t('project_live_site')}
                         </a>
                       )}
                       {project.githubUrl && (
@@ -441,7 +518,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
                           <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                           </svg>
-                          GitHub
+{t('project_github')}
                         </a>
                       )}
                     </div>
@@ -455,53 +532,53 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
         {/* Project Details Sections */}
         <div className="space-y-8 mb-12">
           {/* Purpose */}
-          {project.purpose && (
+          {(project.purpose || project.ja?.purpose) && (
             <section className="bg-white/5 rounded-xl p-6 border border-white/10">
               <h2 className="text-2xl font-semibold text-white mb-4 flex items-center" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
                 <span className="w-3 h-3 bg-blue-400 rounded-full mr-3"></span>
-                🎯 Purpose
+                🎯 {t('project_purpose_title')}
               </h2>
-              <p className="text-white/80 leading-relaxed" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                {project.purpose}
+              <p className="text-white/80 leading-relaxed" style={{ fontFamily: 'Consolas, \"Courier New\", monospace' }}>
+                {lang === 'ja' && project.ja?.purpose ? project.ja.purpose : project.purpose}
               </p>
             </section>
           )}
 
           {/* Role */}
-          {project.role && (
+          {(project.role || project.ja?.role) && (
             <section className="bg-white/5 rounded-xl p-6 border border-white/10">
               <h2 className="text-2xl font-semibold text-white mb-4 flex items-center" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
                 <span className="w-3 h-3 bg-green-400 rounded-full mr-3"></span>
-                👨‍💻 My Role
+                👨‍💻 {t('project_role_title')}
               </h2>
-              <p className="text-white/80 leading-relaxed" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                {project.role}
+              <p className="text-white/80 leading-relaxed" style={{ fontFamily: 'Consolas, \"Courier New\", monospace' }}>
+                {lang === 'ja' && project.ja?.role ? project.ja.role : project.role}
               </p>
             </section>
           )}
 
           {/* Approach */}
-          {project.approach && (
+          {(project.approach || project.ja?.approach) && (
             <section className="bg-white/5 rounded-xl p-6 border border-white/10">
               <h2 className="text-2xl font-semibold text-white mb-4 flex items-center" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
                 <span className="w-3 h-3 bg-purple-400 rounded-full mr-3"></span>
-                🔧 Approach
+                🔧 {t('project_approach_title')}
               </h2>
-              <p className="text-white/80 leading-relaxed" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                {project.approach}
+              <p className="text-white/80 leading-relaxed" style={{ fontFamily: 'Consolas, \"Courier New\", monospace' }}>
+                {lang === 'ja' && project.ja?.approach ? project.ja.approach : project.approach}
               </p>
             </section>
           )}
 
           {/* Results */}
-          {project.results && (
+          {(project.results || project.ja?.results) && (
             <section className="bg-white/5 rounded-xl p-6 border border-white/10">
               <h2 className="text-2xl font-semibold text-white mb-4 flex items-center" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
                 <span className="w-3 h-3 bg-yellow-400 rounded-full mr-3"></span>
-                📊 Results
+                📊 {t('project_results_title')}
               </h2>
-              <p className="text-white/80 leading-relaxed" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                {project.results}
+              <p className="text-white/80 leading-relaxed" style={{ fontFamily: 'Consolas, \"Courier New\", monospace' }}>
+                {lang === 'ja' && project.ja?.results ? project.ja.results : project.results}
               </p>
             </section>
           )}
@@ -511,7 +588,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
             <section className="bg-white/5 rounded-xl p-6 border border-white/10">
               <h2 className="text-2xl font-semibold text-white mb-4 flex items-center" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
                 <span className="w-3 h-3 bg-indigo-400 rounded-full mr-3"></span>
-                ✅ Goals Achieved
+                ✅ {t('project_goals_achieved')}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {project.goalsAchieved.map((goal, index) => (
@@ -521,7 +598,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
                   >
                     <span className="w-2 h-2 bg-green-400 rounded-full mr-3 flex-shrink-0"></span>
                     <span className="text-white/90 text-sm" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                      {goal}
+                      {translateGoal(goal, t)}
                     </span>
                   </div>
                 ))}
@@ -546,7 +623,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            Back to Work
+{t('project_back_to_work')}
           </Link>
         </div>
       </div>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { useLanguage } from "@/components/LanguageProvider";
 
 interface Project {
   id: number;
@@ -17,6 +18,7 @@ interface Project {
 }
 
 export default function MajorProjects() {
+  const { t } = useLanguage();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const projects = [
@@ -38,18 +40,18 @@ export default function MajorProjects() {
     },
     {
       id: 2,
-      title: "Tokyo Road Network – Shortest Path Analysis",
-      purpose: "Route-finding with Dijkstra's algorithm on Tokyo's road network",
-      role: "Geospatial Data Engineer / Python Developer",
-      tech: ["Python (NetworkX, OSMnx)", "PostgreSQL", "QGIS"],
-      image: "/projects/project6/main.jpg",
-      link: "/work/tokyo-road-network",
-      siteUrl: "https://github.com/hirokisato/tokyo-road-network",
+      title: "MeddMax eCommerce Platform Overhaul",
+      purpose: "B2B medical supply company migration from Wix to BigCommerce",
+      role: "Lead Developer",
+      tech: ["BigCommerce Stencil", "HTML", "CSS", "JavaScript", "Liquid Templating"],
+      image: "/projects/project13/main.jpg",
+      link: "/work/meddmax",
+      siteUrl: "https://meddmax.com/",
       achievements: [
-        "Processed 2.3M+ road segments from OpenStreetMap data",
-        "Implemented Dijkstra's algorithm with 95% accuracy in route optimization",
-        "Built interactive visualization showing optimal paths across Tokyo",
-        "Reduced route calculation time from 15s to 0.3s using optimized data structures"
+        "Enhanced user experience with seamless shopping across devices",
+        "Increased sales through B2B bulk ordering features",
+        "Improved search rankings with SEO optimization",
+        "Successfully migrated all data from Wix to BigCommerce platform"
       ]
     },
     {
@@ -87,10 +89,10 @@ export default function MajorProjects() {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 id="projects-title" className="text-3xl md:text-4xl font-bold text-[#0F172A] tracking-tight mb-4 hero-title" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-            Major Projects ✦ Selected Work
+            {t('projects_title')}
           </h2>
           <p className="text-base md:text-lg text-[#0F172A]/70 font-medium max-w-2xl mx-auto" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-            A showcase of impactful projects spanning web development, data engineering, and e-commerce solutions.
+            {t('projects_subtitle')}
           </p>
         </div>
 
@@ -161,7 +163,7 @@ export default function MajorProjects() {
                   className="group/btn inline-flex items-center gap-2 px-4 py-2 bg-[#2B8AE2] hover:bg-[#2563eb] text-white text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B8AE2] focus-visible:ring-offset-2"
                   style={{ fontFamily: 'Consolas, "Courier New", monospace' }}
                 >
-                  View Case Study
+{t('projects_view_case_study')}
                   <svg className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
@@ -183,7 +185,7 @@ export default function MajorProjects() {
             
             {/* Button content */}
             <span className="relative z-10 flex items-center gap-3">
-              See more work
+{t('projects_see_more')}
               <svg className="w-6 h-6 group-hover:translate-x-1 group-hover:rotate-12 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
@@ -247,7 +249,7 @@ export default function MajorProjects() {
                 {/* Tech Stack */}
                 <div className="mb-8">
                   <h4 className="text-lg font-semibold text-[#0F172A] mb-3" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                    Tech Stack
+{t('projects_tech_stack')}
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {selectedProject.tech.map((tech, index) => (
@@ -264,7 +266,7 @@ export default function MajorProjects() {
                 {/* Achievements */}
                 <div className="mb-8">
                   <h4 className="text-lg font-semibold text-[#0F172A] mb-4" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-                    Key Achievements
+{t('projects_key_achievements')}
                   </h4>
                   <ul className="space-y-3">
                     {selectedProject.achievements.map((achievement, index) => (
@@ -287,7 +289,7 @@ export default function MajorProjects() {
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#2B8AE2] hover:bg-[#2563eb] text-white font-semibold rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B8AE2] focus-visible:ring-offset-2"
                     style={{ fontFamily: 'Consolas, "Courier New", monospace' }}
                   >
-                    View Site
+{t('projects_view_site')}
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
@@ -297,7 +299,7 @@ export default function MajorProjects() {
                     className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/60 hover:bg-white/80 text-[#0F172A] font-semibold rounded-lg border border-white/40 transition-all duration-200 hover:scale-105 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B8AE2] focus-visible:ring-offset-2"
                     style={{ fontFamily: 'Consolas, "Courier New", monospace' }}
                   >
-                    Close
+{t('projects_close')}
                   </button>
                 </div>
               </div>

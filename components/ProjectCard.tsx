@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { ExternalLink, Star } from "lucide-react";
 import { formatProjectPeriod } from "@/data/projects";
+import { useLanguage } from "./LanguageProvider";
 
 interface Project {
   id: string;
@@ -16,6 +17,10 @@ interface Project {
   rating?: number;
   liveUrl?: string;
   githubUrl?: string;
+  ja?: {
+    name?: string;
+    category?: string;
+  };
 }
 
 interface ProjectCardProps {
@@ -23,6 +28,7 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+  const { lang } = useLanguage();
   // Get the first image from the project folder
   const fallbackImages = [
     `/projects/${project.folderName}/main.jpg`,
@@ -75,7 +81,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           
           {/* Project Category Badge - Top Left */}
           <div className="absolute top-4 left-4 bg-purple-600/80 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-medium">
-            {project.category}
+            {lang === 'ja' && project.ja?.category ? project.ja.category : project.category}
           </div>
           
           {/* Shortcut Button - Top Right */}
@@ -88,7 +94,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <div className="p-5 flex flex-col">
           {/* Project Name */}
           <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors duration-300 min-h-[28px]" style={{ fontFamily: 'Consolas, "Courier New", monospace' }}>
-            {project.name}
+            {lang === 'ja' && project.ja?.name ? project.ja.name : project.name}
           </h3>
 
           {/* Goals Achieved moved to details page */}
@@ -134,7 +140,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           onClick={(e) => e.stopPropagation()}
         >
           <span className="flex items-center justify-center">
-            View Details
+            {lang === 'ja' ? '詳細を見る' : 'View Details'}
             <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>

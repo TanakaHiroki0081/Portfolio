@@ -1,11 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import { useLanguage } from '@/components/LanguageProvider';
 
 export default function ContactPage() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
+    email: 'sen.python.dev@gmail.com',
     message: ''
   });
   const [errors, setErrors] = useState<{[key: string]: string}>({});
@@ -17,23 +19,19 @@ export default function ContactPage() {
 
     // Name validation
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = t('contact_err_name_required');
     } else if (formData.name.trim().length < 2) {
-      newErrors.name = 'Name must be at least 2 characters';
+      newErrors.name = t('contact_err_name_min');
     }
 
-    // Email validation
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
-    }
+    // Email validation (email is pre-filled and not editable, so no validation needed)
+    // The email is always valid since it's set to sen.python.dev@gmail.com
 
     // Message validation
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
+      newErrors.message = t('contact_err_msg_required');
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
+      newErrors.message = t('contact_err_msg_min');
     }
 
     setErrors(newErrors);
@@ -58,6 +56,12 @@ export default function ContactPage() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    
+    // Prevent changes to email field
+    if (name === 'email') {
+      return;
+    }
+    
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -75,13 +79,9 @@ export default function ContactPage() {
   if (isSubmitted) {
     return (
       <div className="relative min-h-screen overflow-hidden">
-        {/* Dark Purple/Blue Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900">
-          <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-600/10 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
-          <div className="absolute top-0 -right-4 w-72 h-72 bg-indigo-600/10 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950 to-slate-900"></div>
 
-        <div className="relative z-10 container mx-auto px-4 py-12 max-w-4xl">
+        <div className="relative z-10 max-w-[1600px] mx-auto px-6 sm:px-12 lg:px-8 py-12">
           <div className="text-center">
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-12 border border-white/20">
               <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -89,18 +89,16 @@ export default function ContactPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h1 className="text-3xl font-bold text-white mb-4">Message Sent Successfully!</h1>
-              <p className="text-white/80 text-lg mb-8">
-                Thank you for reaching out. I'll get back to you as soon as possible.
-              </p>
+              <h1 className="text-3xl font-bold text-white mb-4">{t('contact_success_title')}</h1>
+              <p className="text-white/80 text-lg mb-8">{t('contact_success_desc')}</p>
               <button
                 onClick={() => {
                   setIsSubmitted(false);
-                  setFormData({ name: '', email: '', message: '' });
+                  setFormData({ name: '', email: 'sen.python.dev@gmail.com', message: '' });
                 }}
-                className="px-8 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all duration-300"
+                className="px-8 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl border border-white/20 transition-all duration-300"
               >
-                Send Another Message
+                {t('contact_success_again')}
               </button>
             </div>
           </div>
@@ -111,37 +109,29 @@ export default function ContactPage() {
 
   return (
     <div className="relative min-h-screen overflow-hidden">
-      {/* Dark Purple/Blue Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900">
-        {/* Subtle animated gradient orbs */}
-        <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-600/10 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
-        <div className="absolute top-0 -right-4 w-72 h-72 bg-indigo-600/10 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-blue-600/10 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000"></div>
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 to-slate-900"></div>
 
       {/* Main Content */}
-      <div className="relative z-10 container mx-auto px-4 py-12 max-w-4xl">
+      <div className="relative z-10 max-w-[1600px] mx-auto px-6 sm:px-12 lg:px-8 py-12">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Get In Touch
+            {t('contact_title')}
           </h1>
           <p className="text-xl text-white/80 max-w-2xl mx-auto">
-            Have a project in mind? Let's discuss how we can work together to bring your ideas to life.
+            {t('contact_subtitle')}
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Contact Form */}
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-            <h2 className="text-2xl font-bold text-white mb-6">Send me a message</h2>
+            <h2 className="text-2xl font-bold text-white mb-6">{t('contact_form_title')}</h2>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Field */}
               <div>
-                <label htmlFor="name" className="block text-white/90 font-medium mb-2">
-                  Name *
-                </label>
+                <label htmlFor="name" className="block text-white/90 font-medium mb-2">{t('contact_name')}</label>
                 <input
                   type="text"
                   id="name"
@@ -151,7 +141,7 @@ export default function ContactPage() {
                   className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 ${
                     errors.name ? 'border-red-500' : 'border-white/20'
                   }`}
-                  placeholder="Your full name"
+                  placeholder={t('contact_name_ph')}
                 />
                 {errors.name && (
                   <p className="text-red-400 text-sm mt-1">{errors.name}</p>
@@ -161,29 +151,22 @@ export default function ContactPage() {
               {/* Email Field */}
               <div>
                 <label htmlFor="email" className="block text-white/90 font-medium mb-2">
-                  Email *
+                  {t('contact_email')} <span className="text-xs text-white/60">(Pre-filled)</span>
                 </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 ${
-                    errors.email ? 'border-red-500' : 'border-white/20'
-                  }`}
-                  placeholder="your.email@example.com"
+                  readOnly
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white/70 cursor-not-allowed transition-all duration-300"
+                  placeholder={t('contact_email_ph')}
                 />
-                {errors.email && (
-                  <p className="text-red-400 text-sm mt-1">{errors.email}</p>
-                )}
               </div>
 
               {/* Message Field */}
               <div>
-                <label htmlFor="message" className="block text-white/90 font-medium mb-2">
-                  Message *
-                </label>
+                <label htmlFor="message" className="block text-white/90 font-medium mb-2">{t('contact_message')}</label>
                 <textarea
                   id="message"
                   name="message"
@@ -193,7 +176,7 @@ export default function ContactPage() {
                   className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-none ${
                     errors.message ? 'border-red-500' : 'border-white/20'
                   }`}
-                  placeholder="Tell me about your project..."
+                  placeholder={t('contact_message_ph')}
                 />
                 {errors.message && (
                   <p className="text-red-400 text-sm mt-1">{errors.message}</p>
@@ -204,7 +187,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-8 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 disabled:scale-100 disabled:cursor-not-allowed"
+                className="w-full px-8 py-4 bg-white/10 hover:bg-white/20 disabled:bg-white/5 text-white font-semibold rounded-xl border border-white/20 transition-all duration-300 transform hover:scale-105 disabled:scale-100 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <span className="flex items-center justify-center">
@@ -212,10 +195,10 @@ export default function ContactPage() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    Sending...
+                    {t('contact_sending')}
                   </span>
                 ) : (
-                  'Send Message'
+                  t('contact_send')
                 )}
               </button>
             </form>
@@ -224,7 +207,7 @@ export default function ContactPage() {
           {/* Contact Information */}
           <div className="space-y-8">
             <div>
-              <h2 className="text-2xl font-bold text-white mb-6">Contact Information</h2>
+              <h2 className="text-2xl font-bold text-white mb-6">{t('contact_info')}</h2>
               <div className="space-y-4">
                 <div className="flex items-center">
                   <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mr-4">
@@ -233,7 +216,7 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-white/90 font-medium">Email</p>
+                    <p className="text-white/90 font-medium">{t('contact_email_label')}</p>
                     <p className="text-white/70">sen.python.dev@gmail.com</p>
                   </div>
                 </div>
@@ -246,8 +229,8 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-white/90 font-medium">Location</p>
-                    <p className="text-white/70">Available for remote work</p>
+                    <p className="text-white/90 font-medium">{t('contact_location_label')}</p>
+                    <p className="text-white/70">{t('contact_location_value')}</p>
                   </div>
                 </div>
 
@@ -258,8 +241,8 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-white/90 font-medium">Response Time</p>
-                    <p className="text-white/70">Usually within 24 hours</p>
+                    <p className="text-white/90 font-medium">{t('contact_response_label')}</p>
+                    <p className="text-white/70">{t('contact_response_value')}</p>
                   </div>
                 </div>
               </div>
@@ -267,17 +250,17 @@ export default function ContactPage() {
 
             {/* Download CV Button */}
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-              <h3 className="text-lg font-semibold text-white mb-3">Download CV</h3>
-              <p className="text-white/70 mb-4">Get a copy of my resume</p>
+              <h3 className="text-lg font-semibold text-white mb-3">{t('contact_cv_title')}</h3>
+              <p className="text-white/70 mb-4">{t('contact_cv_desc')}</p>
               <a
                 href="/resume.pdf"
                 download
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105"
+                className="inline-flex items-center px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-medium rounded-lg border border-white/20 transition-all duration-300 transform hover:scale-105"
               >
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                Download PDF
+                {t('contact_cv_btn')}
               </a>
             </div>
           </div>
